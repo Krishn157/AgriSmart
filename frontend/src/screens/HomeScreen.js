@@ -1,60 +1,54 @@
-import React, { useEffect } from "react";
-
-import { Col, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { listProducts } from "../actions/productActions";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import Paginate from "../components/Paginate";
-import Product from "../components/Product";
-
-import Meta from "../components/Meta";
+import React from "react";
+import { Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const HomeScreen = () => {
-  const dispatch = useDispatch();
-  const params = useParams();
-
-  const keyword = params.keyword;
-  const pageNumber = params.pageNumber || 1;
-
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products, pages, page } = productList;
-
-  useEffect(() => {
-    dispatch(listProducts(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
-
   return (
     <>
-      <Meta />
-      {keyword && (
-        <Link to="/" className="btn btn-light">
-          Go Back
-        </Link>
-      )}
-      <h1>Latest Products</h1>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <>
-          <Row>
-            {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} />
-              </Col>
-            ))}
-          </Row>
-          <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ""}
-          />
-        </>
-      )}
+      <Row>
+        <Col sm={12} md={12} lg={4} xl={4}>
+          <Card className="my-3 p-3 rounded">
+            <Link to={`/inventory`}>
+              <Card.Img src="/images/Inventory.jpg" variant="top" />
+            </Link>
+            <Card.Body>
+              <Link to={`/inventory`}>
+                <Card.Title as="div">
+                  <h3>Agri-Inventory</h3>
+                </Card.Title>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col sm={12} md={12} lg={4} xl={4}>
+          <Card className="my-3 p-3 rounded">
+            <Link to={`/contract`}>
+              <Card.Img src="/images/Contract.jpg" variant="top" />
+            </Link>
+            <Card.Body>
+              <Link to={`/contract`}>
+                <Card.Title as="div">
+                  <h3>Agri-Tract</h3>
+                </Card.Title>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col sm={12} md={12} lg={4} xl={4}>
+          <Card className="my-3 p-3 rounded">
+            <Link to={`/bazaar`}>
+              <Card.Img src="/images/Bazaar.jpg" variant="top" />
+            </Link>
+            <Card.Body>
+              <Link to={`/bazaar`}>
+                <Card.Title as="div">
+                  <h3>Agri-Bazaar</h3>
+                </Card.Title>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };

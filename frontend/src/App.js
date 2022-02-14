@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -17,7 +16,9 @@ import UserEditScreen from "./screens/UserEditScreen";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
-import HomeScreen1 from "./screens/HomeScreen1";
+import HomeScreen from "./screens/HomeScreen";
+import InventoryHomeScreen from "./screens/InventoryHomeScreen";
+import InProgressScreen from "./screens/InProgressScreen";
 
 const App = () => {
   return (
@@ -26,15 +27,26 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Routes>
-            <Route path="/search/:keyword" element={<HomeScreen />} exact />
-            <Route path="/page/:pageNumber" element={<HomeScreen />} exact />
             <Route
-              path="/search/:keyword/page/:pageNumber"
-              element={<HomeScreen />}
+              path="/search/:keyword"
+              element={<InventoryHomeScreen />}
               exact
             />
+            <Route
+              path="/page/:pageNumber"
+              element={<InventoryHomeScreen />}
+              exact
+            />
+            <Route
+              path="/search/:keyword/page/:pageNumber"
+              element={<InventoryHomeScreen />}
+              exact
+            />
+            <Route path="/inventory" element={<InventoryHomeScreen />} exact />
+            <Route path="/contract" element={<InProgressScreen />} exact />
+            <Route path="/bazaar" element={<InProgressScreen />} exact />
+            <Route path="/detector" element={<InProgressScreen />} exact />
             <Route path="/" element={<HomeScreen />} exact />
-            <Route path="/1" element={<HomeScreen1 />} exact />
 
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/shipping" element={<ShippingScreen />} />
