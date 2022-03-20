@@ -159,7 +159,7 @@ const OrderScreen = () => {
                           />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.product}`}>
+                          <Link to={`/inventory/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </Col>

@@ -68,3 +68,34 @@ h2 {
   height: 15vw;
   object-fit: cover;
 }
+.form__dropdown {
+  display: flex;
+  gap: 5rem;
+}
+.form__dropdown > div:first-child {
+  width: 13rem;
+}
+
+.form__dropdown--label {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__dropdown select {
+  background-color: #f7f7f9;
+  border: thin solid #ced4da;
+  display: block;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form__dropdown select:focus {
+  color: #55595c;
+  background-color: #f7f7f9;
+  border-color: #5a5a5a;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgb(26 26 26 / 25%);
+}

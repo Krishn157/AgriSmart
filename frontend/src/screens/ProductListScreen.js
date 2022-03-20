@@ -48,7 +48,7 @@ const ProductListScreen = () => {
       navigate("/login");
     }
     if (successCreate) {
-      navigate(`/admin/product/${createdProduct._id}/edit`);
+      navigate(`/inventory/admin/product/${createdProduct._id}/edit`);
     } else {
       dispatch(listProducts("", pageNumber));
     }
@@ -114,7 +114,9 @@ const ProductListScreen = () => {
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
-                    <LinkContainer to={`/admin/product/${product._id}/edit`}>
+                    <LinkContainer
+                      to={`/inventory/admin/product/${product._id}/edit`}
+                    >
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>
                       </Button>

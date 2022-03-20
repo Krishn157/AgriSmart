@@ -21,6 +21,16 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    isFarmer: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    isContractor: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
   },
   {
     timestamps: true,

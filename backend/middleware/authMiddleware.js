@@ -34,4 +34,22 @@ const admin = (req, res, next) => {
   }
 };
 
-export { protect, admin };
+const farmer = (req, res, next) => {
+  if (req.user && req.user.isFarmer) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized as a farmer");
+  }
+};
+
+const contractor = (req, res, next) => {
+  if (req.user && req.user.isContractor) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized as a contractor");
+  }
+};
+
+export { protect, admin, farmer, contractor };

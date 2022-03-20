@@ -16,6 +16,8 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isFarmer: user.isFarmer,
+      isContractor: user.isContractor,
       token: generateToken(user._id),
     });
   } else {
@@ -28,7 +30,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route  POST /api/users
 // @acccess Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, isFarmer, isContractor } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -41,6 +43,8 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    isFarmer,
+    isContractor,
   });
 
   if (user) {
@@ -49,6 +53,8 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isFarmer: user.isFarmer,
+      isContractor: user.isContractor,
       token: generateToken(user._id),
     });
   } else {
@@ -68,6 +74,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      isFarmer: user.isFarmer,
+      isContractor: user.isContractor,
     });
   } else {
     res.status(401);
@@ -94,6 +102,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      isFarmer: user.isFarmer,
+      isContractor: user.isContractor,
       token: generateToken(updatedUser._id),
     });
   } else {
@@ -142,6 +152,8 @@ const updateUser = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      isFarmer: user.isFarmer,
+      isContractor: user.isContractor,
     });
   } else {
     res.status(404);

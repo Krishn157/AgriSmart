@@ -32,7 +32,7 @@ const PlaceOrderScreen = () => {
 
   useEffect(() => {
     if (success) {
-      navigate(`/order/${order._id}`);
+      navigate(`/inventory/order/${order._id}`);
     }
     // eslint-disable-next-line
   }, [navigate, success]);
@@ -91,7 +91,7 @@ const PlaceOrderScreen = () => {
                           />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.product}`}>
+                          <Link to={`/inventory/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </Col>

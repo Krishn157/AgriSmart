@@ -12,6 +12,8 @@ const RegisterScreen = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
+  const [isFarmer, setIsFarmer] = useState(true);
+  const [isContractor, setIsContractor] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -31,12 +33,22 @@ const RegisterScreen = () => {
     }
   }, [navigate, userInfo, redirect]);
 
+  const userTypeHandler = (e) => {
+    if (e.target.value === "Farmer") {
+      setIsFarmer(true);
+      setIsContractor(false);
+    } else if (e.target.value === "Contractor") {
+      setIsFarmer(false);
+      setIsContractor(true);
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");
     } else {
-      dispatch(register(name, email, password));
+      dispatch(register(name, email, password, isFarmer, isContractor));
     }
   };
 
@@ -85,6 +97,32 @@ const RegisterScreen = () => {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
+        </Form.Group>
+        <br />
+        <Form.Group>
+          <Form.Label>User Type</Form.Label>
+
+          <Col>
+            <Form.Check
+              inline
+              type="radio"
+              label="Farmer"
+              id="Farmer"
+              name="userType"
+              value="Farmer"
+              checked
+              onChange={userTypeHandler}
+            ></Form.Check>
+            <Form.Check
+              inline
+              type="radio"
+              label="Contractor"
+              id="Contractor"
+              name="userType"
+              value="Contractor"
+              onChange={userTypeHandler}
+            ></Form.Check>
+          </Col>
         </Form.Group>
         <br />
         <Button type="submit" variant="primary">
