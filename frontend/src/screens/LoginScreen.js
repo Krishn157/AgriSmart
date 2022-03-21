@@ -23,7 +23,9 @@ const LoginScreen = () => {
   const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && userInfo.isContractor && redirect.includes("/contract")) {
+      navigate(`${redirect}/allLands`);
+    } else if (userInfo) {
       navigate(redirect);
     }
   }, [navigate, userInfo, redirect]);

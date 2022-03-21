@@ -35,11 +35,13 @@ const ContractNavbar = () => {
           {/* <SearchBox /> */}
 
           <Nav className="ml-auto">
-            {/* <LinkContainer to="/contract/add">
-              <Nav.Link>
-                <i class="fas fa-plus-square"></i> Add Land
-              </Nav.Link>
-            </LinkContainer> */}
+            {userInfo.isContractor && (
+              <LinkContainer to="/contract/myBids">
+                <Nav.Link>
+                  <i class="fas fa-rupee-sign"></i> My Bids
+                </Nav.Link>
+              </LinkContainer>
+            )}
 
             <LinkContainer to="/contract/bonds">
               <Nav.Link>

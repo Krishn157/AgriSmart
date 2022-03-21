@@ -1,11 +1,23 @@
 import asyncHandler from "express-async-handler";
+import Bid from "../models/bidModel.js";
 import Land from "../models/landModel.js";
 
 // @desc Fetch all lands
 // @route GET /api/lands
 // @acccess Private/Contractor
 const getAllLands = asyncHandler(async (req, res) => {
-  const lands = await Land.find({}).populate("user", "id name");
+  const ids = await Bid.find({ contractorId: req.user._id }).select("landId");
+  const landIds = ids.map((bid) => bid.landId);
+
+  // .map((bid) => bid.landId)
+  // .toArray();
+  // console.log(ids);
+  // console.log(landIds);
+  // const lands = await Land.find({}).populate("user", "id name");
+  const lands = await Land.find({ _id: { $not: { $in: landIds } } }).populate(
+    "user",
+    "id name"
+  );
   res.json(lands);
 });
 

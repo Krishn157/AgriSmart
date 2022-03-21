@@ -1,4 +1,7 @@
 import {
+  ALL_LANDS_LIST_FAIL,
+  ALL_LANDS_LIST_REQUEST,
+  ALL_LANDS_LIST_SUCCESS,
   LAND_CREATE_FAIL,
   LAND_CREATE_REQUEST,
   LAND_CREATE_RESET,
@@ -28,6 +31,22 @@ export const myLandListReducer = (state = { lands: [] }, action) => {
         lands: action.payload,
       };
     case MY_LANDS_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const allLandListReducer = (state = { lands: [] }, action) => {
+  switch (action.type) {
+    case ALL_LANDS_LIST_REQUEST:
+      return { loading: true, lands: [] };
+    case ALL_LANDS_LIST_SUCCESS:
+      return {
+        loading: false,
+        lands: action.payload,
+      };
+    case ALL_LANDS_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

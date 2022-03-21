@@ -47,7 +47,7 @@ const Header = () => {
     <header>
       {pathname.includes("/inventory") ? (
         <InventoryNavbar />
-      ) : userInfo && userInfo.isFarmer && pathname.includes("/contract") ? (
+      ) : userInfo && pathname.includes("/contract") ? (
         <ContractNavbar />
       ) : (
         <HomeNavbar />

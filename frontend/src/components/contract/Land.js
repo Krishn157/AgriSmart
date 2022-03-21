@@ -2,21 +2,35 @@ import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
+import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
 
-const Land = ({ land, name, del }) => {
+const Land = ({ land, name, util, isFarmer, farmerId }) => {
+  const [modalShow, setModalShow] = React.useState(false);
   return (
     <Card className="my-3 p-3 rounded">
-      <Link to={`/contract/land/${land._id}`}>
-        <Card.Img src={land.image} variant="top" className="prod-img" />
-      </Link>
-      <Card.Body>
+      {isFarmer ? (
         <Link to={`/contract/land/${land._id}`}>
+          <Card.Img src={land.image} variant="top" className="prod-img" />
+        </Link>
+      ) : (
+        <Card.Img src={land.image} variant="top" className="prod-img" />
+      )}
+
+      <Card.Body>
+        {isFarmer ? (
+          <Link to={`/contract/land/${land._id}`}>
+            <Card.Title>
+              <strong>{land.area} Acres Land</strong>
+            </Card.Title>
+          </Link>
+        ) : (
           <Card.Title>
             <strong>
               {land.area} Acres Land, Owned by {name}
             </strong>
           </Card.Title>
-        </Link>
+        )}
+
         <Card.Text>
           At {land.district}, {land.state}
         </Card.Text>
@@ -25,14 +39,35 @@ const Land = ({ land, name, del }) => {
         <Card.Text>Est. Production - {land.estProd}</Card.Text>
         <Card.Text>Min Bidding Amount - ₹{land.minBidAmt}</Card.Text>
         <Card.Text>Capital Return - {land.capitalReturn}%</Card.Text>
-        <LinkContainer to={`/contract/land/${land._id}/edit`}>
-          <Button variant="primary" className="mx-3">
-            <i className="fas fa-edit"></i> Edit
-          </Button>
-        </LinkContainer>
-        <Button variant="danger" className="mx-3" onClick={() => del(land._id)}>
-          <i className="fas fa-trash"></i> Delete
-        </Button>
+        {isFarmer ? (
+          <>
+            {" "}
+            <LinkContainer to={`/contract/land/${land._id}/edit`}>
+              <Button variant="primary">
+                <i className="fas fa-edit"></i> Edit
+              </Button>
+            </LinkContainer>
+            <Button
+              variant="danger"
+              className="mx-3"
+              onClick={() => util(land._id)}
+            >
+              <i className="fas fa-trash"></i> Delete
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button variant="primary" onClick={() => setModalShow(true)}>
+              <i class="fas fa-rupee-sign"></i> Make Bid
+            </Button>
+            <MyVerticallyCenteredModal
+              show={modalShow}
+              landId={land._id}
+              farmerId={farmerId}
+              onHide={() => setModalShow(false)}
+            />
+          </>
+        )}
       </Card.Body>
     </Card>
   );

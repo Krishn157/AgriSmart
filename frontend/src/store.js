@@ -29,12 +29,18 @@ import {
   orderPayReducer,
 } from "./reducers/orderReducers.js";
 import {
+  allLandListReducer,
   landCreateReducer,
   landDeleteReducer,
   landDetailsReducer,
   landUpdateReducer,
   myLandListReducer,
 } from "./reducers/landReducers.js";
+import {
+  bidCreateReducer,
+  bidListByLandReducer,
+  bidListMyReducer,
+} from "./reducers/bidReducers.js";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -63,6 +69,10 @@ const reducer = combineReducers({
   landDetails: landDetailsReducer,
   landUpdate: landUpdateReducer,
   landCreate: landCreateReducer,
+  allLandList: allLandListReducer,
+  bidListMy: bidListMyReducer,
+  bidCreate: bidCreateReducer,
+  bidListByLand: bidListByLandReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
