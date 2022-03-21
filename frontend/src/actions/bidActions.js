@@ -95,7 +95,7 @@ export const listLandBids = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/lands/landBids/${id}`, config);
+    const { data } = await axios.get(`/api/bids/landBids/${id}`, config);
 
     dispatch({
       type: BID_LAND_LIST_SUCCESS,

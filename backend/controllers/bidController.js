@@ -46,6 +46,7 @@ const updateBidToApproved = asyncHandler(async (req, res) => {
     bid.approvedAt = Date.now();
 
     const updatedBid = await bid.save();
+    await Bid.updateMany({}, { isActive: false });
 
     res.json(updatedBid);
   } else {
