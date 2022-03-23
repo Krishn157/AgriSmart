@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Col, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { listLandBids } from "../../actions/bidActions";
+import { approveBid, listLandBids } from "../../actions/bidActions";
 import { listLandDetails } from "../../actions/landActions";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
+import {
+  BID_APPROVE_RESET,
+  BID_LAND_LIST_RESET,
+} from "../../constants/bidConstants";
 
 const LandDetailScreen = () => {
   const navigate = useNavigate();
@@ -20,14 +24,27 @@ const LandDetailScreen = () => {
   const bidListByLand = useSelector((state) => state.bidListByLand);
   const { loading: loadingBids, error: errorBids, bids } = bidListByLand;
 
+  const bidApprove = useSelector((state) => state.bidApprove);
+  const {
+    loading: loadingApprove,
+    success: successApprove,
+    error: errorApprove,
+  } = bidApprove;
+
   useEffect(() => {
     if (!land || land._id !== landId) {
+      dispatch({ type: BID_LAND_LIST_RESET });
       dispatch(listLandDetails(landId));
     }
     if (land && land._id === landId) {
+      // dispatch({type: BID_APPROVE_RESET})
       dispatch(listLandBids(landId));
     }
-  }, [dispatch, navigate, landId, land]);
+  }, [dispatch, navigate, landId, land, successApprove]);
+
+  const approveHandler = (id) => {
+    dispatch(approveBid(id));
+  };
   return (
     <Row>
       <Col md={4}>
@@ -61,7 +78,7 @@ const LandDetailScreen = () => {
         {loadingBids ? (
           <Loader />
         ) : errorBids ? (
-          <Message variant="danger">{error}</Message>
+          <Message variant="danger">{errorBids}</Message>
         ) : (
           <Table striped bordered hover responsive className="table-sm">
             <thead>
@@ -76,6 +93,7 @@ const LandDetailScreen = () => {
               </tr>
             </thead>
             <tbody>
+              {bids.length === 0 && <p>No Bids received yet !</p>}
               {bids.map((bid) => (
                 <tr key={bid._id}>
                   {/* <td>{bid._id}</td> */}
@@ -97,11 +115,21 @@ const LandDetailScreen = () => {
                     ) : (
                       <i className="fas fa-times" style={{ color: "red" }}></i>
                     )} */}
-                    {bid.isApproved ? <>APPROVED</> : <>PENDING</>}
+                    {bid.isApproved ? (
+                      <>APPROVED</>
+                    ) : !bid.isActive ? (
+                      <>DECLINED</>
+                    ) : (
+                      <>PENDING</>
+                    )}
                   </td>
                   <td>
-                    {!bid.isApproved && (
-                      <Button className="btn-sm" variant="primary">
+                    {!bid.isApproved && bid.isActive && (
+                      <Button
+                        className="btn-sm"
+                        variant="primary"
+                        onClick={() => approveHandler(bid._id)}
+                      >
                         Approve
                       </Button>
                     )}

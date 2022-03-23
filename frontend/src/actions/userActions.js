@@ -1,4 +1,8 @@
 import axios from "axios";
+import {
+  BID_LAND_LIST_RESET,
+  BID_LIST_MY_RESET,
+} from "../constants/bidConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 import {
   USER_DELETE_FAIL,
@@ -68,6 +72,8 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_DETAILS_RESET });
   dispatch({ type: ORDER_LIST_MY_RESET });
   dispatch({ type: USER_LIST_RESET });
+  dispatch({ type: BID_LAND_LIST_RESET });
+  dispatch({ type: BID_LIST_MY_RESET });
 };
 
 export const register =

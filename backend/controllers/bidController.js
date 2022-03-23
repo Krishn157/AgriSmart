@@ -1,11 +1,12 @@
 import asyncHandler from "express-async-handler";
 import Bid from "../models/bidModel.js";
+import Land from "../models/landModel.js";
 
 // @desc Create new bid
 // @route POST /api/bids
 // @acccess Private
 const addBid = asyncHandler(async (req, res) => {
-  const { farmerId, landId, bidAmt, paymentMethod } = req.body;
+  const { farmerId, landId, bidAmt } = req.body;
 
   const bid = new Bid({
     contractorId: req.user._id,
@@ -46,7 +47,8 @@ const updateBidToApproved = asyncHandler(async (req, res) => {
     bid.approvedAt = Date.now();
 
     const updatedBid = await bid.save();
-    await Bid.updateMany({}, { isActive: false });
+    await Bid.updateMany({ landId: bid.landId }, { isActive: false });
+    await Land.findByIdAndUpdate(bid.landId, { isTransacted: true });
 
     res.json(updatedBid);
   } else {

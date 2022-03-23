@@ -23,7 +23,7 @@ const LandEditScreen = () => {
   const [cropName, setCropName] = useState("Sample crop");
   const [minBidAmt, setMinBidAmt] = useState(0);
   const [estProd, setEstProd] = useState(0);
-  const [capitalReturn, setCapitalReturn] = useState("");
+  // const [capitalReturn, setCapitalReturn] = useState("");
 
   const [uploading, setUploading] = useState(false);
   const [image, setImage] = useState("");
@@ -57,7 +57,7 @@ const LandEditScreen = () => {
         setImage(land.image);
         setEstProd(land.estProd);
         setMinBidAmt(land.minBidAmt);
-        setCapitalReturn(land.capitalReturn);
+        // setCapitalReturn(land.capitalReturn);
       }
     }
   }, [dispatch, navigate, landId, land, successUpdate]);
@@ -87,6 +87,7 @@ const LandEditScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(estProd);
     dispatch(
       updateLand({
         _id: landId,
@@ -98,7 +99,7 @@ const LandEditScreen = () => {
         image,
         minBidAmt,
         estProd,
-        capitalReturn,
+        // capitalReturn,
       })
     );
   };
@@ -287,7 +288,7 @@ const LandEditScreen = () => {
               ></Form.Control>
             </Form.Group>
 
-            <br></br>
+            {/* <br></br>
             <Form.Group controlId="capitalReturn">
               <Form.Label>Capital Return %</Form.Label>
               <Form.Control
@@ -296,7 +297,7 @@ const LandEditScreen = () => {
                 value={capitalReturn}
                 onChange={(e) => setCapitalReturn(e.target.value)}
               ></Form.Control>
-            </Form.Group>
+            </Form.Group> */}
             <br></br>
             <Button type="submit" variant="primary">
               Update

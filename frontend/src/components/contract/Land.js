@@ -20,7 +20,9 @@ const Land = ({ land, name, util, isFarmer, farmerId }) => {
         {isFarmer ? (
           <Link to={`/contract/land/${land._id}`}>
             <Card.Title>
-              <strong>{land.area} Acres Land</strong>
+              <strong>
+                {land.area} Acres Land <i class="fas fa-caret-right"></i>
+              </strong>
             </Card.Title>
           </Link>
         ) : (
@@ -38,7 +40,7 @@ const Land = ({ land, name, util, isFarmer, farmerId }) => {
         <Card.Text>Crop - {land.crop}</Card.Text>
         <Card.Text>Est. Production - {land.estProd}</Card.Text>
         <Card.Text>Min Bidding Amount - ₹{land.minBidAmt}</Card.Text>
-        <Card.Text>Capital Return - {land.capitalReturn}%</Card.Text>
+        {/* <Card.Text>Capital Return - {land.capitalReturn}%</Card.Text> */}
         {isFarmer ? (
           <>
             {" "}
@@ -63,6 +65,7 @@ const Land = ({ land, name, util, isFarmer, farmerId }) => {
             <MyVerticallyCenteredModal
               show={modalShow}
               landId={land._id}
+              minBidAmt={land.minBidAmt}
               farmerId={farmerId}
               onHide={() => setModalShow(false)}
             />

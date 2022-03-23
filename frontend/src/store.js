@@ -37,10 +37,13 @@ import {
   myLandListReducer,
 } from "./reducers/landReducers.js";
 import {
+  bidApproveReducer,
   bidCreateReducer,
   bidListByLandReducer,
   bidListMyReducer,
+  bidPayReducer,
 } from "./reducers/bidReducers.js";
+import { contractCreateReducer } from "./reducers/contractReducers.js";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -73,6 +76,9 @@ const reducer = combineReducers({
   bidListMy: bidListMyReducer,
   bidCreate: bidCreateReducer,
   bidListByLand: bidListByLandReducer,
+  bidApprove: bidApproveReducer,
+  bidPay: bidPayReducer,
+  contractCreate: contractCreateReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

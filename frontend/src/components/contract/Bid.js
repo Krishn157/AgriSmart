@@ -1,12 +1,17 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
+import { PayPalButton } from "react-paypal-button-v2";
+import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
+import Loader from "../Loader";
 import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
 
-const Bid = ({ bid, util }) => {
-  const { landId: land, farmerId, bidAmt, isApproved } = bid;
+const Bid = ({ bid, successPaymentHandler, bidPay, sdkReady }) => {
+  const { landId: land, farmerId, bidAmt, isApproved, isActive, isPaid } = bid;
+  const { loadingPay, successPay } = bidPay;
   const [modalShow, setModalShow] = React.useState(false);
+
   return (
     <Card className="my-3 p-3 rounded">
       <Card.Img src={land.image} variant="top" className="prod-img" />
@@ -17,16 +22,39 @@ const Bid = ({ bid, util }) => {
             {land.area} Acres Land, Owned by {farmerId.name}
           </strong>
         </Card.Title>
-
         <Card.Text>
           At {land.district}, {land.state}
         </Card.Text>
         <Card.Text>Season - {land.season}</Card.Text>
         <Card.Text>Crop - {land.crop}</Card.Text>
         <Card.Text>Bidding Amount - ₹{bidAmt}</Card.Text>
-        {isApproved ? (
-          <Button variant="primary" onClick={() => util()}>
-            <i class="fas fa-rupee-sign"></i> Make Payment
+
+        {isPaid ? (
+          <Button variant="success" disabled style={{ color: "black" }}>
+            <i class="fas fa-check"></i>
+            {"   "} BID COMPLETED
+          </Button>
+        ) : isApproved && !isPaid ? (
+          <>
+            {loadingPay && <Loader />}
+            {!sdkReady ? (
+              <Loader />
+            ) : (
+              <PayPalButton
+                amount={bidAmt}
+                onSuccess={(paymentResult) => {
+                  successPaymentHandler(paymentResult, bid._id);
+                }}
+              />
+            )}
+          </>
+        ) : //   <Button variant="primary" onClick={() => util()}>
+        //     <i class="fas fa-rupee-sign"></i> Make Payment
+        //   </Button>
+        !isActive ? (
+          <Button variant="primary" disabled>
+            <i class="fas fa-times"></i>
+            {"   "} BID DECLINED
           </Button>
         ) : (
           <Button variant="primary" disabled>

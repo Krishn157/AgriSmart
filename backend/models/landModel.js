@@ -42,10 +42,15 @@ const landSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
-    capitalReturn: {
-      type: Number,
+    // capitalReturn: {
+    //   type: Number,
+    //   required: true,
+    //   default: 0,
+    // },
+    isTransacted: {
+      type: Boolean,
       required: true,
-      default: 0,
+      default: false,
     },
   },
   {

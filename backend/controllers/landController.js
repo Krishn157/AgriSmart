@@ -14,10 +14,10 @@ const getAllLands = asyncHandler(async (req, res) => {
   // console.log(ids);
   // console.log(landIds);
   // const lands = await Land.find({}).populate("user", "id name");
-  const lands = await Land.find({ _id: { $not: { $in: landIds } } }).populate(
-    "user",
-    "id name"
-  );
+  const lands = await Land.find({
+    _id: { $not: { $in: landIds } },
+    isTransacted: false,
+  }).populate("user", "id name");
   res.json(lands);
 });
 
@@ -60,17 +60,8 @@ const deleteLand = asyncHandler(async (req, res) => {
 // @route   PUT /api/lands/:id
 // @access  Private/Farmer
 const updateLand = asyncHandler(async (req, res) => {
-  const {
-    area,
-    state,
-    district,
-    crop,
-    season,
-    image,
-    minBidAmt,
-    estProd,
-    capitalReturn,
-  } = req.body;
+  const { area, state, district, crop, season, image, minBidAmt, estProd } =
+    req.body;
 
   const land = await Land.findById(req.params.id);
 
@@ -83,7 +74,6 @@ const updateLand = asyncHandler(async (req, res) => {
     land.image = image;
     land.minBidAmt = minBidAmt;
     land.estProd = estProd;
-    land.capitalReturn = capitalReturn;
     const updatedLand = await land.save();
     res.json(updatedLand);
   } else {
@@ -106,7 +96,6 @@ const createLand = asyncHandler(async (req, res) => {
     image: "/images/sample.jpg",
     minBidAmt: 0,
     estProd: 0,
-    capitalReturn: 0,
   });
 
   const createdLand = await land.save();

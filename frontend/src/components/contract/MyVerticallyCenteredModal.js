@@ -17,6 +17,7 @@ const MyVerticallyCenteredModal = (props) => {
 
   const bidCreate = useSelector((state) => state.bidCreate);
   const { loading, error, success, bid } = bidCreate;
+  const [warning, setWarning] = useState("");
 
   useEffect(() => {
     if (success) {
@@ -27,13 +28,17 @@ const MyVerticallyCenteredModal = (props) => {
   }, [success, navigate, dispatch]);
 
   const submitHandler = () => {
-    dispatch(
-      createBid({
-        landId: props.landId,
-        farmerId: props.farmerId,
-        bidAmt,
-      })
-    );
+    if (bidAmt >= props.minBidAmt) {
+      dispatch(
+        createBid({
+          landId: props.landId,
+          farmerId: props.farmerId,
+          bidAmt,
+        })
+      );
+    } else {
+      setWarning("BIDDING AMOUNT SHOULD BE >= MIN BIDDING AMOUNT");
+    }
   };
 
   return (
@@ -51,6 +56,9 @@ const MyVerticallyCenteredModal = (props) => {
           <Message variant="danger">{error}</Message>
         ) : (
           <Form>
+            {warning.length > 1 && (
+              <Message variant="danger">{warning}</Message>
+            )}
             <Form.Group controlId="bid">
               <Form.Control
                 type="number"
