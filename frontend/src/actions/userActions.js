@@ -3,6 +3,10 @@ import {
   BID_LAND_LIST_RESET,
   BID_LIST_MY_RESET,
 } from "../constants/bidConstants";
+import {
+  CONTRACT_LIST_CONTRACTOR_RESET,
+  CONTRACT_LIST_FARMER_RESET,
+} from "../constants/contractConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 import {
   USER_DELETE_FAIL,
@@ -74,6 +78,8 @@ export const logout = () => (dispatch) => {
   dispatch({ type: USER_LIST_RESET });
   dispatch({ type: BID_LAND_LIST_RESET });
   dispatch({ type: BID_LIST_MY_RESET });
+  dispatch({ type: CONTRACT_LIST_CONTRACTOR_RESET });
+  dispatch({ type: CONTRACT_LIST_FARMER_RESET });
 };
 
 export const register =

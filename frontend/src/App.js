@@ -25,6 +25,7 @@ import LandEditScreen from "./screens/contract/LandEditScreen";
 import AllLandsScreen from "./screens/contract/AllLandsScreen";
 import MyBidsScreen from "./screens/contract/MyBidsScreen";
 import LandDetailScreen from "./screens/contract/LandDetailScreen";
+import ContractsListScreen from "./screens/contract/ContractListScreen";
 
 const App = () => {
   return (
@@ -81,6 +82,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <LandEditScreen />
+                </PrivateRoute>
+              }
+              exact
+            />
+            <Route
+              path="/contract/bonds"
+              element={
+                <PrivateRoute>
+                  <ContractsListScreen />
                 </PrivateRoute>
               }
               exact

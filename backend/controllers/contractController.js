@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Contract from "../models/contractModel.js";
+import Land from "../models/landModel.js";
 
 // @desc Create new contract
 // @route POST /api/contracts
@@ -61,11 +62,31 @@ const getFarmerContracts = asyncHandler(async (req, res) => {
 // @route GET /api/contracts/lands/:id
 // @acccess Private/farmer
 const getLandContract = asyncHandler(async (req, res) => {
-  const contract = await Contract.findOne({ landId: req.params.id })
+  const contract = await Contract.find({ landId: req.params.id })
     .populate("farmerId", "name email")
     .populate("contractorId", "name email")
     .populate("landId");
   res.json(contract);
+});
+
+// @desc    Update contract to settled
+// @route   GET /api/contracts/:id/settle
+// @access  Private/Farmer
+const updateContractToSettled = asyncHandler(async (req, res) => {
+  const contract = await Contract.findById(req.params.id);
+
+  if (contract) {
+    contract.isSettled = true;
+    contract.settledAt = Date.now();
+
+    const updatedContract = await contract.save();
+    await Land.findByIdAndUpdate(contract.landId, { isTransacted: false });
+
+    res.json(updatedContract);
+  } else {
+    res.status(404);
+    throw new Error("Contract not found");
+  }
 });
 
 export {
@@ -74,4 +95,5 @@ export {
   getContractorContracts,
   getFarmerContracts,
   getLandContract,
+  updateContractToSettled,
 };

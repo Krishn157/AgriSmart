@@ -22,10 +22,13 @@ const contractSchema = mongoose.Schema(
       required: true,
       default: 0.0,
     },
-    isActive: {
+    isSettled: {
       type: Boolean,
       required: true,
-      default: true,
+      default: false,
+    },
+    settledAt: {
+      type: Date,
     },
   },
   {

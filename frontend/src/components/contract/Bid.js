@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { PayPalButton } from "react-paypal-button-v2";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { createContract } from "../../actions/contractActions";
 import Loader from "../Loader";
 import MyVerticallyCenteredModal from "./MyVerticallyCenteredModal";
 
 const Bid = ({ bid, successPaymentHandler, bidPay, sdkReady }) => {
   const { landId: land, farmerId, bidAmt, isApproved, isActive, isPaid } = bid;
+
   const { loadingPay, successPay } = bidPay;
   const [modalShow, setModalShow] = React.useState(false);
 
@@ -43,7 +45,7 @@ const Bid = ({ bid, successPaymentHandler, bidPay, sdkReady }) => {
               <PayPalButton
                 amount={bidAmt}
                 onSuccess={(paymentResult) => {
-                  successPaymentHandler(paymentResult, bid._id);
+                  successPaymentHandler(paymentResult, bid);
                 }}
               />
             )}

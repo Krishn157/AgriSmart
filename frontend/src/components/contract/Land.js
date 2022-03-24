@@ -41,7 +41,7 @@ const Land = ({ land, name, util, isFarmer, farmerId }) => {
         <Card.Text>Est. Production - {land.estProd}</Card.Text>
         <Card.Text>Min Bidding Amount - ₹{land.minBidAmt}</Card.Text>
         {/* <Card.Text>Capital Return - {land.capitalReturn}%</Card.Text> */}
-        {isFarmer ? (
+        {isFarmer && !land.isTransacted ? (
           <>
             {" "}
             <LinkContainer to={`/contract/land/${land._id}/edit`}>
@@ -57,6 +57,11 @@ const Land = ({ land, name, util, isFarmer, farmerId }) => {
               <i className="fas fa-trash"></i> Delete
             </Button>
           </>
+        ) : isFarmer && land.isTransacted ? (
+          <Button variant="success" disabled style={{ color: "black" }}>
+            <i class="fas fa-check"></i>
+            {"   "} LAND UNDER TRANSACTION
+          </Button>
         ) : (
           <>
             <Button variant="primary" onClick={() => setModalShow(true)}>

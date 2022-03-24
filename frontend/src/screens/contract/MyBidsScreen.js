@@ -4,11 +4,13 @@ import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { listMyBids, payBid } from "../../actions/bidActions";
+import { createContract } from "../../actions/contractActions";
 import Bid from "../../components/contract/Bid";
 import Land from "../../components/contract/Land";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import { BID_PAY_RESET } from "../../constants/bidConstants";
+import { CONTRACT_CREATE_RESET } from "../../constants/contractConstants";
 
 const MyBidsScreen = () => {
   const navigate = useNavigate();
@@ -24,13 +26,25 @@ const MyBidsScreen = () => {
   const bidPay = useSelector((state) => state.bidPay);
   const { loading: loadingPay, success: successPay } = bidPay;
 
+  const contractCreate = useSelector((state) => state.contractCreate);
+  const {
+    loading: loadingContract,
+    contract,
+    success: successContract,
+  } = contractCreate;
+
   useEffect(() => {
+    dispatch({ type: CONTRACT_CREATE_RESET });
     if (!userInfo) {
       navigate("/login");
     }
 
     if (userInfo && userInfo.isFarmer) {
       navigate("/contract");
+    }
+
+    if (successContract) {
+      navigate(`/contract/bonds/${contract._id}`);
     }
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
@@ -56,10 +70,26 @@ const MyBidsScreen = () => {
     } else {
       setSdkReady(true);
     }
-  }, [bids, dispatch, loading, navigate, successPay, userInfo]);
+  }, [
+    bids,
+    contract,
+    dispatch,
+    loading,
+    navigate,
+    successContract,
+    successPay,
+    userInfo,
+  ]);
 
-  const successPaymentHandler = (paymentResult, bidId) => {
-    dispatch(payBid(bidId, paymentResult));
+  const successPaymentHandler = (paymentResult, bid) => {
+    dispatch(payBid(bid._id, paymentResult));
+    dispatch(
+      createContract({
+        farmerId: bid.farmerId._id,
+        landId: bid.landId._id,
+        contractAmt: bid.bidAmt,
+      })
+    );
   };
 
   return (
