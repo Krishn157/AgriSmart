@@ -178,7 +178,7 @@ export const states = [
     seasons: [
       {
         name: "Kharif",
-        crop: [
+        crops: [
           "Arhar/Tur",
           "Bajra",
           "Maize",
@@ -190,11 +190,11 @@ export const states = [
       },
       {
         name: "Rabi",
-        crop: ["Wheat", "Linseed"],
+        crops: ["Wheat", "Linseed"],
       },
       {
         name: "Whole Year",
-        crop: ["Cotton(lint)"],
+        crops: ["Cotton(lint)"],
       },
     ],
     districts: [

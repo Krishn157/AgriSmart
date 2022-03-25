@@ -9,7 +9,7 @@ import Bid from "../../components/contract/Bid";
 import Land from "../../components/contract/Land";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-import { BID_PAY_RESET } from "../../constants/bidConstants";
+import { BID_LIST_MY_RESET, BID_PAY_RESET } from "../../constants/bidConstants";
 import { CONTRACT_CREATE_RESET } from "../../constants/contractConstants";
 
 const MyBidsScreen = () => {
@@ -35,6 +35,7 @@ const MyBidsScreen = () => {
 
   useEffect(() => {
     dispatch({ type: CONTRACT_CREATE_RESET });
+    // dispatch({ type: BID_LIST_MY_RESET });
     if (!userInfo) {
       navigate("/login");
     }

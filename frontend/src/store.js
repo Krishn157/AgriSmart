@@ -45,6 +45,7 @@ import {
 } from "./reducers/bidReducers.js";
 import {
   contractCreateReducer,
+  contractDetailsReducer,
   contractListByLandReducer,
   contractListContractorReducer,
   contractListFarmerReducer,
@@ -89,6 +90,7 @@ const reducer = combineReducers({
   contractListFarmer: contractListFarmerReducer,
   contractListByLand: contractListByLandReducer,
   contractSettle: contractSettleReducer,
+  contractDetails: contractDetailsReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

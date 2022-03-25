@@ -3,6 +3,9 @@ import {
   CONTRACT_CREATE_FAIL,
   CONTRACT_CREATE_REQUEST,
   CONTRACT_CREATE_SUCCESS,
+  CONTRACT_DETAILS_FAIL,
+  CONTRACT_DETAILS_REQUEST,
+  CONTRACT_DETAILS_SUCCESS,
   CONTRACT_LAND_LIST_FAIL,
   CONTRACT_LAND_LIST_REQUEST,
   CONTRACT_LAND_LIST_SUCCESS,
@@ -183,6 +186,38 @@ export const settleContract = (id) => async (dispatch, getState) => {
     }
     dispatch({
       type: CONTRACT_SETTLE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const listContractDetails = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: CONTRACT_DETAILS_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(`/api/contracts/${id}`, config);
+    dispatch({
+      type: CONTRACT_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    if (message === "Not authorized, token failed") {
+      dispatch(logout());
+    }
+    dispatch({
+      type: CONTRACT_DETAILS_FAIL,
       payload: message,
     });
   }

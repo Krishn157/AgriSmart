@@ -3,6 +3,9 @@ import {
   CONTRACT_CREATE_REQUEST,
   CONTRACT_CREATE_RESET,
   CONTRACT_CREATE_SUCCESS,
+  CONTRACT_DETAILS_FAIL,
+  CONTRACT_DETAILS_REQUEST,
+  CONTRACT_DETAILS_SUCCESS,
   CONTRACT_LAND_LIST_FAIL,
   CONTRACT_LAND_LIST_REQUEST,
   CONTRACT_LAND_LIST_RESET,
@@ -141,6 +144,22 @@ export const contractSettleReducer = (state = {}, action) => {
       };
     case CONTRACT_SETTLE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const contractDetailsReducer = (
+  state = { loading: true, contract: {} },
+  action
+) => {
+  switch (action.type) {
+    case CONTRACT_DETAILS_REQUEST:
+      return { loading: true, ...state };
+    case CONTRACT_DETAILS_SUCCESS:
+      return { loading: false, contract: action.payload };
+    case CONTRACT_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

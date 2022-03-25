@@ -11,6 +11,7 @@ import {
   BID_LAND_LIST_SUCCESS,
   BID_LIST_MY_FAIL,
   BID_LIST_MY_REQUEST,
+  BID_LIST_MY_RESET,
   BID_LIST_MY_SUCCESS,
   BID_PAY_FAIL,
   BID_PAY_REQUEST,
@@ -41,6 +42,7 @@ export const createBid = (bid) => async (dispatch, getState) => {
       type: BID_CREATE_SUCCESS,
       payload: data,
     });
+    dispatch({ type: BID_LIST_MY_RESET });
   } catch (error) {
     dispatch({
       type: BID_CREATE_FAIL,

@@ -6,14 +6,21 @@ import Land from "../models/landModel.js";
 // @route GET /api/lands
 // @acccess Private/Contractor
 const getAllLands = asyncHandler(async (req, res) => {
-  const ids = await Bid.find({ contractorId: req.user._id }).select("landId");
+  const settledIds = await Bid.find({ isPaid: true })
+    .populate({
+      path: "landId",
+      match: { isTransacted: false },
+    })
+    .select("landId");
+  const filtered = settledIds.filter((si) => si.landId !== null);
+  const finalSetlledIds = filtered.map((settled) => settled._id);
+
+  const ids = await Bid.find({
+    _id: { $not: { $in: finalSetlledIds } },
+    contractorId: req.user._id,
+  }).select("landId");
   const landIds = ids.map((bid) => bid.landId);
 
-  // .map((bid) => bid.landId)
-  // .toArray();
-  // console.log(ids);
-  // console.log(landIds);
-  // const lands = await Land.find({}).populate("user", "id name");
   const lands = await Land.find({
     _id: { $not: { $in: landIds } },
     isTransacted: false,
