@@ -23,11 +23,14 @@ const LoginScreen = () => {
   const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isContractor && redirect.includes("/contract")) {
-      navigate(`${redirect}/allLands`);
-    } else if (userInfo) {
+    if (userInfo) {
       navigate(redirect);
     }
+    // if (userInfo && userInfo.isContractor && redirect.includes("/contract")) {
+    //   navigate(`${redirect}/allLands`);
+    // } else if (userInfo) {
+    //   navigate(redirect);
+    // }
   }, [navigate, userInfo, redirect]);
 
   const submitHandler = (e) => {

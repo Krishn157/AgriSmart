@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
+import produceRoutes from "./routes/produceRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import landRoutes from "./routes/landRoutes.js";
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+app.use("/api/produce", produceRoutes);
 app.use("/api/lands", landRoutes);
 app.use("/api/bids", bidRoutes);
 app.use("/api/contracts", contractRoutes);

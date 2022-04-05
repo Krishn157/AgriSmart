@@ -27,6 +27,12 @@ import MyBidsScreen from "./screens/contract/MyBidsScreen";
 import LandDetailScreen from "./screens/contract/LandDetailScreen";
 import ContractsListScreen from "./screens/contract/ContractListScreen";
 import ContractDetailsScreen from "./screens/contract/ContractDetailsScreen";
+import MyProduceScreen from "./screens/produce/MyProduceScreen";
+import AllProduceScreen from "./screens/produce/AllProduceScreen";
+import ProduceEditScreen from "./screens/produce/ProduceEditScreen";
+import ProduceOrderScreen from "./screens/produce/ProduceOrderScreen";
+import MyPurchasesScreen from "./screens/produce/MyPurchasesScreen";
+import MySalesScreen from "./screens/produce/MySalesScreen";
 
 const App = () => {
   return (
@@ -116,7 +122,65 @@ const App = () => {
               exact
             />
 
-            <Route path="/bazaar" element={<InProgressScreen />} exact />
+            <Route
+              path="/bazaar"
+              element={
+                <PrivateRoute>
+                  <MyProduceScreen />
+                </PrivateRoute>
+              }
+              exact
+            />
+            <Route
+              path="/bazaar/myPurchases"
+              element={
+                <PrivateRoute>
+                  <MyPurchasesScreen />
+                </PrivateRoute>
+              }
+              exact
+            />
+
+            <Route
+              path="/bazaar/mySales"
+              element={
+                <PrivateRoute>
+                  <MySalesScreen />
+                </PrivateRoute>
+              }
+              exact
+            />
+
+            <Route
+              path="/bazaar/allProduces"
+              element={
+                <PrivateRoute>
+                  <AllProduceScreen />
+                </PrivateRoute>
+              }
+              exact
+            />
+
+            <Route
+              path="/bazaar/produce/:id/edit"
+              element={
+                <PrivateRoute>
+                  <ProduceEditScreen />
+                </PrivateRoute>
+              }
+              exact
+            />
+
+            <Route
+              path="/bazaar/produce/:id/order"
+              element={
+                <PrivateRoute>
+                  <ProduceOrderScreen />
+                </PrivateRoute>
+              }
+              exact
+            />
+
             <Route path="/detector" element={<InProgressScreen />} exact />
             <Route path="/" element={<HomeScreen />} exact />
 

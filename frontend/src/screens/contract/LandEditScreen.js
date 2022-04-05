@@ -242,7 +242,7 @@ const LandEditScreen = () => {
             <br></br>
             <br></br>
             <Form.Group controlId="estProd">
-              <Form.Label>Estimated Production</Form.Label>
+              <Form.Label>Estimated Production (Q)</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Enter Estimated Prod"
@@ -279,7 +279,7 @@ const LandEditScreen = () => {
             <br></br>
 
             <Form.Group controlId="minBidAmt">
-              <Form.Label>Min Bidding Amount</Form.Label>
+              <Form.Label>Min Bidding Amount (&#8377;)</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Enter min bidding Amount"

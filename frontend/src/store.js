@@ -51,6 +51,18 @@ import {
   contractListFarmerReducer,
   contractSettleReducer,
 } from "./reducers/contractReducers.js";
+import {
+  allProduceListReducer,
+  myProduceListReducer,
+  myPurchasesListReducer,
+  mySalesListReducer,
+  produceCreateReducer,
+  produceDeleteReducer,
+  produceDeliverReducer,
+  produceDetailsReducer,
+  producePayReducer,
+  produceUpdateReducer,
+} from "./reducers/produceReducers.js";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -91,6 +103,16 @@ const reducer = combineReducers({
   contractListByLand: contractListByLandReducer,
   contractSettle: contractSettleReducer,
   contractDetails: contractDetailsReducer,
+  myProduceList: myProduceListReducer,
+  produceDelete: produceDeleteReducer,
+  produceDetails: produceDetailsReducer,
+  produceUpdate: produceUpdateReducer,
+  produceCreate: produceCreateReducer,
+  allProduceList: allProduceListReducer,
+  producePay: producePayReducer,
+  myPurchasesList: myPurchasesListReducer,
+  mySalesList: mySalesListReducer,
+  produceDeliver: produceDeliverReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

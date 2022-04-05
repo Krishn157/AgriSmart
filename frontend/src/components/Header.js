@@ -9,12 +9,13 @@ import { path } from "express/lib/application";
 import InventoryNavbar from "./InventoryNavbar";
 import ContractNavbar from "./ContractNavbar";
 import HomeNavbar from "./HomeNavbar";
+import BazaarNavbar from "./BazaarNavbar";
 // import leaf from "/images/leaf.png";
 
 const Header = () => {
   // const dispatch = useDispatch();
   const { pathname } = useLocation();
-  console.log(pathname);
+  // console.log(pathname);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -49,6 +50,8 @@ const Header = () => {
         <InventoryNavbar />
       ) : userInfo && pathname.includes("/contract") ? (
         <ContractNavbar />
+      ) : userInfo && pathname.includes("/bazaar") ? (
+        <BazaarNavbar />
       ) : (
         <HomeNavbar />
       )}

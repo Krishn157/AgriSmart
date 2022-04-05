@@ -38,7 +38,7 @@ const Land = ({ land, name, util, isFarmer, farmerId }) => {
         </Card.Text>
         <Card.Text>Season - {land.season}</Card.Text>
         <Card.Text>Crop - {land.crop}</Card.Text>
-        <Card.Text>Est. Production - {land.estProd}</Card.Text>
+        <Card.Text>Est. Production - {land.estProd}Q</Card.Text>
         <Card.Text>Min Bidding Amount - ₹{land.minBidAmt}</Card.Text>
         {/* <Card.Text>Capital Return - {land.capitalReturn}%</Card.Text> */}
         {isFarmer && !land.isTransacted ? (

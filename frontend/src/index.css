@@ -99,3 +99,8 @@ h2 {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgb(26 26 26 / 25%);
 }
+
+.add_div {
+  display: flex;
+  gap: 2rem;
+}
