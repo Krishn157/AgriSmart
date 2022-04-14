@@ -17,43 +17,43 @@ const BazaarNavbar = () => {
     dispatch(logout());
   };
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+    <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
       <Container>
-        <LinkContainer to="/bazaar">
+        <LinkContainer to='/bazaar'>
           <Navbar.Brand>Agri-Bazaar</Navbar.Brand>
         </LinkContainer>
 
-        <LinkContainer to="/">
+        <LinkContainer to='/'>
           <Nav.Link>
-            <span class="home">Home</span>
+            <span class='home'>Home</span>
           </Nav.Link>
         </LinkContainer>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
           {/* <SearchBox /> */}
 
-          <Nav className="ml-auto">
+          <Nav className='ml-auto'>
             {userInfo.isContractor && (
-              <LinkContainer to="/bazaar/myPurchases">
+              <LinkContainer to='/bazaar/myPurchases'>
                 <Nav.Link>
-                  <i class="fas fa-rupee-sign"></i> My Purchases
+                  <i class='fas fa-rupee-sign'></i> My Purchases
                 </Nav.Link>
               </LinkContainer>
             )}
 
             {userInfo.isFarmer && (
-              <LinkContainer to="/bazaar/mySales">
+              <LinkContainer to='/bazaar/mySales'>
                 <Nav.Link>
-                  <i class="fas fa-rupee-sign"></i> My Sales
+                  <i class='fas fa-rupee-sign'></i> My Sales
                 </Nav.Link>
               </LinkContainer>
             )}
 
-            <NavDropdown title={userInfo.name} id="username">
-              <LinkContainer to="/bazaar/profile">
+            <NavDropdown title={userInfo.name} id='username'>
+              {/* <LinkContainer to="/bazaar/profile">
                 <NavDropdown.Item>Profile</NavDropdown.Item>
-              </LinkContainer>
+              </LinkContainer> */}
               <NavDropdown.Item onClick={logoutHandler}>
                 Logout
               </NavDropdown.Item>

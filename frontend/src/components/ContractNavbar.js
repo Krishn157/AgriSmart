@@ -18,41 +18,41 @@ const ContractNavbar = () => {
     dispatch(logout());
   };
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+    <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
       <Container>
-        <LinkContainer to="/contract">
+        <LinkContainer to='/contract'>
           <Navbar.Brand>Agri-Tract</Navbar.Brand>
         </LinkContainer>
 
-        <LinkContainer to="/">
+        <LinkContainer to='/'>
           <Nav.Link>
-            <span class="home">Home</span>
+            <span class='home'>Home</span>
           </Nav.Link>
         </LinkContainer>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
           {/* <SearchBox /> */}
 
-          <Nav className="ml-auto">
+          <Nav className='ml-auto'>
             {userInfo.isContractor && (
-              <LinkContainer to="/contract/myBids">
+              <LinkContainer to='/contract/myBids'>
                 <Nav.Link>
-                  <i class="fas fa-rupee-sign"></i> My Bids
+                  <i class='fas fa-rupee-sign'></i> My Bids
                 </Nav.Link>
               </LinkContainer>
             )}
 
-            <LinkContainer to="/contract/bonds">
+            <LinkContainer to='/contract/bonds'>
               <Nav.Link>
-                <i class="fas fa-receipt"></i> Contracts
+                <i class='fas fa-receipt'></i> Contracts
               </Nav.Link>
             </LinkContainer>
 
-            <NavDropdown title={userInfo.name} id="username">
-              <LinkContainer to="/contract/profile">
+            <NavDropdown title={userInfo.name} id='username'>
+              {/* <LinkContainer to="/contract/profile">
                 <NavDropdown.Item>Profile</NavDropdown.Item>
-              </LinkContainer>
+              </LinkContainer> */}
               <NavDropdown.Item onClick={logoutHandler}>
                 Logout
               </NavDropdown.Item>

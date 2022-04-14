@@ -18,7 +18,7 @@ import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import HomeScreen from "./screens/HomeScreen";
 import InventoryHomeScreen from "./screens/InventoryHomeScreen";
-import InProgressScreen from "./screens/InProgressScreen";
+import PlantDiseasePredictor from "./screens/PlantDiseasePredictor";
 import MyLandsScreen from "./screens/contract/MyLandsScreen";
 import PrivateRoute from "./components/PrivateRoute";
 import LandEditScreen from "./screens/contract/LandEditScreen";
@@ -38,27 +38,27 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main className="py-3">
+      <main className='py-3'>
         <Container>
           <Routes>
             <Route
-              path="/inventory/search/:keyword"
+              path='/inventory/search/:keyword'
               element={<InventoryHomeScreen />}
               exact
             />
             <Route
-              path="/inventory/page/:pageNumber"
+              path='/inventory/page/:pageNumber'
               element={<InventoryHomeScreen />}
               exact
             />
             <Route
-              path="/inventory/search/:keyword/page/:pageNumber"
+              path='/inventory/search/:keyword/page/:pageNumber'
               element={<InventoryHomeScreen />}
               exact
             />
-            <Route path="/inventory" element={<InventoryHomeScreen />} exact />
+            <Route path='/inventory' element={<InventoryHomeScreen />} exact />
             <Route
-              path="/contract"
+              path='/contract'
               element={
                 <PrivateRoute>
                   <MyLandsScreen />
@@ -67,7 +67,7 @@ const App = () => {
               exact
             />
             <Route
-              path="/contract/allLands"
+              path='/contract/allLands'
               element={
                 <PrivateRoute>
                   <AllLandsScreen />
@@ -76,7 +76,7 @@ const App = () => {
               exact
             />
             <Route
-              path="/contract/land/:id"
+              path='/contract/land/:id'
               element={
                 <PrivateRoute>
                   <LandDetailScreen />
@@ -85,7 +85,7 @@ const App = () => {
               exact
             />
             <Route
-              path="/contract/land/:id/edit"
+              path='/contract/land/:id/edit'
               element={
                 <PrivateRoute>
                   <LandEditScreen />
@@ -94,7 +94,7 @@ const App = () => {
               exact
             />
             <Route
-              path="/contract/bonds"
+              path='/contract/bonds'
               element={
                 <PrivateRoute>
                   <ContractsListScreen />
@@ -103,7 +103,7 @@ const App = () => {
               exact
             />
             <Route
-              path="/contract/bonds/:id"
+              path='/contract/bonds/:id'
               element={
                 <PrivateRoute>
                   <ContractDetailsScreen />
@@ -113,7 +113,7 @@ const App = () => {
             />
 
             <Route
-              path="/contract/myBids"
+              path='/contract/myBids'
               element={
                 <PrivateRoute>
                   <MyBidsScreen />
@@ -123,7 +123,7 @@ const App = () => {
             />
 
             <Route
-              path="/bazaar"
+              path='/bazaar'
               element={
                 <PrivateRoute>
                   <MyProduceScreen />
@@ -132,7 +132,7 @@ const App = () => {
               exact
             />
             <Route
-              path="/bazaar/myPurchases"
+              path='/bazaar/myPurchases'
               element={
                 <PrivateRoute>
                   <MyPurchasesScreen />
@@ -142,7 +142,7 @@ const App = () => {
             />
 
             <Route
-              path="/bazaar/mySales"
+              path='/bazaar/mySales'
               element={
                 <PrivateRoute>
                   <MySalesScreen />
@@ -152,7 +152,7 @@ const App = () => {
             />
 
             <Route
-              path="/bazaar/allProduces"
+              path='/bazaar/allProduces'
               element={
                 <PrivateRoute>
                   <AllProduceScreen />
@@ -162,7 +162,7 @@ const App = () => {
             />
 
             <Route
-              path="/bazaar/produce/:id/edit"
+              path='/bazaar/produce/:id/edit'
               element={
                 <PrivateRoute>
                   <ProduceEditScreen />
@@ -172,7 +172,7 @@ const App = () => {
             />
 
             <Route
-              path="/bazaar/produce/:id/order"
+              path='/bazaar/produce/:id/order'
               element={
                 <PrivateRoute>
                   <ProduceOrderScreen />
@@ -181,48 +181,48 @@ const App = () => {
               exact
             />
 
-            <Route path="/detector" element={<InProgressScreen />} exact />
-            <Route path="/" element={<HomeScreen />} exact />
+            <Route path='/detector' element={<PlantDiseasePredictor />} exact />
+            <Route path='/' element={<HomeScreen />} exact />
 
-            <Route path="/login" element={<LoginScreen />} />
-            <Route path="/register" element={<RegisterScreen />} />
-            <Route path="/inventory/shipping" element={<ShippingScreen />} />
-            <Route path="/inventory/payment" element={<PaymentScreen />} />
+            <Route path='/login' element={<LoginScreen />} />
+            <Route path='/register' element={<RegisterScreen />} />
+            <Route path='/inventory/shipping' element={<ShippingScreen />} />
+            <Route path='/inventory/payment' element={<PaymentScreen />} />
             <Route
-              path="/inventory/placeorder"
+              path='/inventory/placeorder'
               element={<PlaceOrderScreen />}
             />
-            <Route path="/inventory/profile" element={<ProfileScreen />} />
-            <Route path="/inventory/product/:id" element={<ProductScreen />} />
-            <Route path="/inventory/cart">
-              <Route path="/inventory/cart/:id" element={<CartScreen />} />
-              <Route path="" element={<CartScreen />} />
+            <Route path='/inventory/profile' element={<ProfileScreen />} />
+            <Route path='/inventory/product/:id' element={<ProductScreen />} />
+            <Route path='/inventory/cart'>
+              <Route path='/inventory/cart/:id' element={<CartScreen />} />
+              <Route path='' element={<CartScreen />} />
             </Route>
-            <Route path="/inventory/order/:id" element={<OrderScreen />} />
+            <Route path='/inventory/order/:id' element={<OrderScreen />} />
             <Route
-              path="/inventory/admin/userlist"
+              path='/inventory/admin/userlist'
               element={<UserListScreen />}
             />
             <Route
-              path="/inventory/admin/productlist"
+              path='/inventory/admin/productlist'
               element={<ProductListScreen />}
               exact
             />
             <Route
-              path="/inventory/admin/productlist/:pageNumber"
+              path='/inventory/admin/productlist/:pageNumber'
               element={<ProductListScreen />}
               exact
             />
             <Route
-              path="/inventory/admin/orderlist"
+              path='/inventory/admin/orderlist'
               element={<OrderListScreen />}
             />
             <Route
-              path="/inventory/admin/user/:id/edit"
+              path='/inventory/admin/user/:id/edit'
               element={<UserEditScreen />}
             />
             <Route
-              path="/inventory/admin/product/:id/edit"
+              path='/inventory/admin/product/:id/edit'
               element={<ProductEditScreen />}
             />
           </Routes>
